@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ea580c">
+<title>المنيو</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #ea580c;
+    --accent-dark: #c2410c;
+    --accent-deep: #9a3412;
+    --ink: #1c1917;
+    --muted: #6b625c;
+    --line: #efe8e2;
+    --tint: #fff7ed;
+    --tint-2: #ffedd5;
+    --tint-border: #fed7aa;
+    --bg: #ffffff;
+    --display: 'Lalezar', 'IBM Plex Sans Arabic', Tahoma, sans-serif;
+    --body: 'IBM Plex Sans Arabic', Tahoma, system-ui, sans-serif;
+    --radius: 22px;
+    --shadow: 0 10px 30px -12px rgba(154, 52, 18, 0.28);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); }
+  body { padding-bottom: env(safe-area-inset-bottom, 0px); -webkit-font-smoothing: antialiased; }
+  button, input, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); }
+
+  /* ---------- Top bar ---------- */
+  .top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark {
+    width: 44px; height: 44px; border-radius: 14px; background: var(--accent);
+    display: grid; place-items: center; color: #fff;
+  }
+  .brand-mark svg { width: 26px; height: 26px; }
+  .brand-name { font-family: var(--display); font-size: 26px; line-height: 1; }
+  .brand-sub { font-size: 13px; color: var(--muted); font-weight: 500; margin-top: 4px; }
+  .lang {
+    min-height: 44px; padding: 0 16px; border-radius: 999px; border: 2px solid var(--line);
+    background: #fff; font-weight: 700; font-size: 15px;
+  }
+  .lang:hover { border-color: var(--tint-border); background: var(--tint); }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; margin-top: 8px; }
+  .hero .photo { aspect-ratio: 16 / 9; border-radius: 32px; }
+  .stamp {
+    position: absolute; top: -14px; inset-inline-end: 18px; z-index: 2;
+    width: clamp(96px, 18vw, 138px); aspect-ratio: 1; border-radius: 50%;
+    background: var(--accent); color: #fff; display: grid; place-items: center; text-align: center;
+    transform: rotate(-9deg); box-shadow: var(--shadow);
+    outline: 6px solid #fff;
+  }
+  .stamp b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(38px, 7vw, 56px); line-height: .9; }
+  .stamp small { font-size: clamp(11px, 2vw, 14px); font-weight: 600; }
+  .hero-card {
+    position: relative; z-index: 1;
+    margin: -64px clamp(12px, 4vw, 40px) 0;
+    background: #fff; border-radius: 26px; box-shadow: var(--shadow);
+    padding: clamp(20px, 4vw, 30px) clamp(20px, 4vw, 34px);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .hero-card .kicker { color: var(--accent-dark); font-weight: 700; font-size: 15px; }
+  .hero-card h1 { margin: 2px 0 0; font-family: var(--display); font-weight: 400; font-size: clamp(40px, 8vw, 64px); line-height: 1.05; }
+
+  /* ---------- Category tabs ---------- */
+  .tabs {
+    position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94);
+    backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--line); margin-top: 36px;
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .tabs .wrap { display: flex; gap: 8px; overflow-x: auto; padding-top: 12px; padding-bottom: 12px; scrollbar-width: none; }
+  .tabs .wrap::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: none; min-height: 44px; padding: 0 20px; border-radius: 999px; text-decoration: none;
+    display: inline-flex; align-items: center; font-weight: 700; font-size: 16px;
+    color: var(--ink); background: var(--tint); border: 2px solid transparent;
+  }
+  .tab:hover { border-color: var(--tint-border); }
+  .tab[aria-current="true"] { background: var(--accent-dark); color: #fff; }
+
+  /* ---------- Sections & cards ---------- */
+  .cat { padding-top: 36px; }
+  .cat-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+  .cat-head h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6vw, 44px); line-height: 1; }
+  .cat-head .rule { flex: 1; height: 3px; border-radius: 2px; background: var(--tint-2); }
+  .cat-head .count { font-size: 14px; color: var(--muted); font-weight: 600; }
+  .items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .items.small { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .card {
+    display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; align-items: center;
+    padding: 12px; border: 2px solid var(--line); border-radius: var(--radius); background: #fff;
+    transition: border-color .2s;
+  }
+  .card .photo { aspect-ratio: 1; border-radius: 16px; }
+  .card h3 { margin: 0; font-size: 21px; font-weight: 700; line-height: 1.3; }
+  .card .price { margin-top: 2px; font-family: var(--display); font-size: 26px; color: var(--accent-dark); }
+  .items.small .card { grid-template-columns: minmax(0, 1fr); text-align: center; }
+  .items.small .card .photo { aspect-ratio: 4 / 3; }
+
+  /* ---------- Photo slots ---------- */
+  .photo {
+    position: relative; margin: 0; overflow: hidden;
+    background: var(--tint); border: 2px dashed var(--tint-border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    color: var(--muted); text-align: center; padding: 10px;
+  }
+  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .photo:has(img) { border-color: transparent; }
+  .photo svg { width: 30px; height: 30px; color: var(--accent); }
+  .photo code { font-size: 12px; direction: ltr; unicode-bidi: isolate; color: var(--accent-dark); font-family: ui-monospace, Menlo, monospace; }
+  .hero .photo svg { width: 48px; height: 48px; }
+  .hero .photo code { font-size: 15px; }
+
+
+  /* ---------- Contact ---------- */
+  .contact {
+    margin-top: 56px; padding: clamp(24px, 5vw, 40px); border-radius: 32px; background: var(--tint);
+    display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  }
+  .contact h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(30px, 5vw, 40px); }
+  .contact p { margin: 4px 0 0; color: var(--muted); font-weight: 500; }
+  .contact .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    min-height: 52px; padding: 0 22px; border-radius: 999px; font-weight: 700; font-size: 17px;
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none; border: 2px solid transparent;
+  }
+  .btn svg { width: 22px; height: 22px; flex: none; }
+  .btn-primary { background: var(--accent-dark); color: #fff; }
+  .btn-primary:hover { background: var(--accent-deep); }
+  .num { direction: ltr; unicode-bidi: isolate; }
+  .foot { text-align: center; color: var(--muted); font-size: 14px; padding: 28px 0 8px; }
+
+
+  /* ---------- Responsive & motion ---------- */
+  @media (max-width: 760px) {
+    .items { grid-template-columns: minmax(0, 1fr); }
+    .items.small { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .items.small .card { padding: 8px; }
+    .items.small .card h3 { font-size: 17px; }
+    .items.small .card .price { font-size: 21px; }
+    .card { grid-template-columns: 104px minmax(0, 1fr); }
+    .hero .photo { aspect-ratio: 4 / 3; }
+    .hero-card { margin-top: -48px; }
+  }
+  @media (max-width: 350px) {
+    .items.small { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @keyframes pop { 0% { transform: rotate(-9deg) scale(.6); opacity: 0; } 100% { transform: rotate(-9deg) scale(1); opacity: 1; } }
+  .stamp { animation: pop .6s cubic-bezier(.2,1.4,.4,1) .15s both; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .stamp { animation: none; }
+  }
+  @media print {
+    .tabs, .lang, .contact .actions { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.5 3 4.5 4.5 4.5 8.5a4.5 4.5 0 0 1-9 0c0-2 1-3.2 2-4.2.3 1.4 1 2.2 2 2.7-.6-2.8.1-5 .5-7z"/><path d="M5 21h14"/></svg>
+      </div>
+      <div>
+        <div class="brand-name" data-t="name"></div>
+        <div class="brand-sub" data-t="tagline"></div>
+      </div>
+    </div>
+    <button class="lang" id="langBtn" type="button"></button>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero" id="hero" aria-labelledby="heroTitle"></section>
+</div>
+
+<nav class="tabs" id="tabs"><div class="wrap" id="tabList"></div></nav>
+
+<main class="wrap" id="menu"></main>
+
+<div class="wrap">
+  <section class="contact">
+    <div>
+      <h2 data-t="contactTitle"></h2>
+      <p data-t="contactText"></p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" id="callBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="num" id="phoneText"></span>
+      </a>
+    </div>
+  </section>
+  <p class="foot" data-t="footNote"></p>
+</div>
+
+
+<script>
+/* =========================================================
+   EDIT HERE: restaurant details, menu items and prices.
+   price: number. currency: "usd" for dollars, "lbp" for
+   Lebanese pounds in thousands (600 = 600,000 ل.ل).
+   img: path to the photo (put photos in an "images" folder).
+   ========================================================= */
+const CONFIG = {
+  name:    { ar: "ع الفحم", en: "3al Fa7em" },
+  tagline: { ar: "فروج ولفة... والطعمة تحفة", en: "Chicken wraps… with a taste that’s simply amazing" },
+  phone: "96176935460",          // international format, used for the call button
+  phoneDisplay: "76 935 460",
+};
+
+const MENU = [
+  { id: "grill", title: { ar: "المشاوي", en: "Grill" }, items: [
+    { id: "chicken", name: { ar: "فروج عالفحم", en: "Charcoal Chicken" }, price: 15, currency: "usd", img: "images/chicken.png", featured: true },
+  ]},
+  { id: "sandwiches", title: { ar: "سندويشات", en: "Sandwiches" }, items: [
+    { id: "sand-l", name: { ar: "سندويش كبير", en: "Large Sandwich" }, price: 4, currency: "usd", img: "images/sandwich-large.jpg" },
+    { id: "sand-s", name: { ar: "سندويش صغير", en: "Small Sandwich" }, price: 3, currency: "usd", img: "images/sandwich-small.png" },
+  ]},
+  { id: "fries", title: { ar: "بطاطا", en: "Fries" }, items: [
+    { id: "fries-l", name: { ar: "صحن بطاطا كبير", en: "Large Fries" }, price: 600, currency: "lbp", img: "images/fries-large.webp" },
+    { id: "fries-s", name: { ar: "صحن بطاطا صغير", en: "Small Fries" }, price: 300, currency: "lbp", img: "images/fries-small.webp" },
+  ]},
+  { id: "drinks", title: { ar: "مشروبات", en: "Drinks" }, small: true, items: [
+    { id: "pepsi", name: { ar: "بيبسي", en: "Pepsi" }, price: 70, currency: "lbp", img: "images/pepsi.webp" },
+    { id: "laban", name: { ar: "لبن", en: "Laban" }, price: 70, currency: "lbp", img: "images/laban.jpg" },
+    { id: "water", name: { ar: "مياه", en: "Water" }, price: 30, currency: "lbp", img: "images/water.jpg" },
+  ]},
+];
+/* ======================= END OF EDITS ======================= */
+
+const T = {
+  ar: { langBtn: "English", signature: "طبق البيت", add: "أضف", items: "أصناف", viewOrder: "عرض الطلب",
+        yourOrder: "طلبك", total: "المجموع", howToGet: "طريقة الاستلام", delivery: "توصيل", pickup: "من المحل",
+        yourName: "الاسم", address: "العنوان", notes: "ملاحظات (اختياري)", needName: "اكتب اسمك لنعرف لمن الطلب.",
+        needAddr: "اكتب العنوان حتى نوصل الطلب.", sendWa: "أرسل الطلب على واتساب", clear: "إفراغ الطلب", close: "إغلاق",
+        contactTitle: "جوعان؟", contactText: "اتصل فينا ومنجهّز طلبك.", whatsapp: "واتساب",
+        footNote: "", thousand: "ألف", lbp: "ل.ل", photo: "صورة",
+        newOrder: "طلب جديد", name: "الاسم", mode: "الاستلام", addr: "العنوان", note: "ملاحظات", inc: "زيادة", dec: "إنقاص" },
+  en: { langBtn: "عربي", signature: "House special", add: "Add", items: "items", viewOrder: "View order",
+        yourOrder: "Your order", total: "Total", howToGet: "How do you want it?", delivery: "Delivery", pickup: "Pickup",
+        yourName: "Name", address: "Address", notes: "Notes (optional)", needName: "Add your name so we know who it's for.",
+        needAddr: "Add your address so we can deliver.", sendWa: "Send order on WhatsApp", clear: "Clear order", close: "Close",
+        contactTitle: "Hungry?", contactText: "Call us and we'll get your order ready.", whatsapp: "WhatsApp",
+        footNote: "Prices are in US dollars or Lebanese pounds as shown.", thousand: "K", lbp: "LBP", photo: "Photo",
+        newOrder: "New order", name: "Name", mode: "Order type", addr: "Address", note: "Notes", inc: "Increase", dec: "Decrease" },
+};
+
+const ICON = {
+  photo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+  minus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>',
+};
+
+const ALL = MENU.flatMap(c => c.items);
+const byId = Object.fromEntries(ALL.map(i => [i.id, i]));
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+};
+let lang = store.get("menu-lang", "ar");
+
+const t = k => T[lang][k];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmtPrice = i => i.currency === "usd" ? `$${i.price}` : `${i.price} ${t("thousand")}`;
+const bdi = s => `<bdi>${esc(s)}</bdi>`;
+const fmtLbp = n => `${(n * 1000).toLocaleString("en-US")} ${t("lbp")}`;
+
+function photo(i) {
+  return `<figure class="photo"><img src="${esc(i.img)}" alt="${esc(i.name[lang])}" loading="lazy" onerror="this.remove()">
+    ${ICON.photo}<code>${esc(i.img)}</code></figure>`;
+}
+
+function render() {
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.title = `${CONFIG.name[lang]}`;
+  document.querySelectorAll("[data-t]").forEach(el => {
+    const k = el.dataset.t;
+    el.textContent = k === "name" ? CONFIG.name[lang] : k === "tagline" ? CONFIG.tagline[lang] : t(k);
+  });
+  document.querySelectorAll("[data-t-aria]").forEach(el => el.setAttribute("aria-label", t(el.dataset.tAria)));
+  document.getElementById("langBtn").textContent = t("langBtn");
+  document.getElementById("phoneText").textContent = CONFIG.phoneDisplay;
+  document.getElementById("callBtn").href = `tel:+${CONFIG.phone}`;
+
+  const f = ALL.find(i => i.featured) || ALL[0];
+  document.getElementById("hero").innerHTML = `
+    <div class="stamp" aria-hidden="true"><div><b>${bdi(fmtPrice(f))}</b></div></div>
+    ${photo(f)}
+    <div class="hero-card">
+      <div><div class="kicker">${t("signature")}</div><h1 id="heroTitle">${esc(f.name[lang])}</h1></div>
+    </div>`;
+
+  document.getElementById("tabList").innerHTML = MENU.map(c =>
+    `<a class="tab" href="#cat-${c.id}" data-tab="${c.id}">${esc(c.title[lang])}</a>`).join("");
+
+  document.getElementById("menu").innerHTML = MENU.map(c => `
+    <section class="cat" id="cat-${c.id}" aria-labelledby="h-${c.id}">
+      <div class="cat-head"><h2 id="h-${c.id}">${esc(c.title[lang])}</h2><span class="rule"></span>
+        <span class="count">${c.items.length} ${t("items")}</span></div>
+      <div class="items${c.small ? " small" : ""}">
+        ${c.items.map(i => `
+          <article class="card">
+            ${photo(i)}
+            <div>
+              <h3>${esc(i.name[lang])}</h3>
+              <div class="price">${bdi(fmtPrice(i))}</div>
+            </div>
+          </article>`).join("")}
+      </div>
+    </section>`).join("");
+
+  observeSections();
+}
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  lang = lang === "ar" ? "en" : "ar"; store.set("menu-lang", lang); render();
+});
+
+/* Active tab while scrolling */
+let observer;
+function observeSections() {
+  if (observer) observer.disconnect();
+  const tabs = document.querySelectorAll(".tab");
+  observer = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        const id = en.target.id.replace("cat-", "");
+        tabs.forEach(tb => {
+          const on = tb.dataset.tab === id;
+          tb.setAttribute("aria-current", on ? "true" : "false");
+          if (on) {
+            // Scroll only the tab strip sideways, never the page
+            const strip = document.getElementById("tabList");
+            const a = tb.getBoundingClientRect(), s = strip.getBoundingClientRect();
+            const delta = (a.left + a.width / 2) - (s.left + s.width / 2);
+            strip.scrollBy({ left: delta, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+          }
+        });
+      }
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll(".cat").forEach(s => observer.observe(s));
+}
+
+
+render();
+</script>
+</body>
+</html>
