@@ -109,6 +109,7 @@
   }
   .card .photo { aspect-ratio: 1; border-radius: 16px; }
   .card h3 { margin: 0; font-size: 21px; font-weight: 700; line-height: 1.3; }
+  .card .desc { margin: 2px 0 0; font-size: 15px; font-weight: 500; color: var(--muted); }
   .card .price { margin-top: 2px; font-family: var(--display); font-size: 26px; color: var(--accent-dark); }
   .items.small .card { grid-template-columns: minmax(0, 1fr); text-align: center; }
   .items.small .card .photo { aspect-ratio: 4 / 3; }
@@ -231,6 +232,13 @@ const CONFIG = {
 const MENU = [
   { id: "grill", title: { ar: "المشاوي", en: "Grill" }, items: [
     { id: "chicken", name: { ar: "فروج عالفحم", en: "Charcoal Chicken" }, price: 15, currency: "usd", img: "images/chicken.png", featured: true },
+    { id: "half-chicken", name: { ar: "نص فروج عالفحم", en: "Half Charcoal Chicken" }, price: 7.5, currency: "usd", img: "images/half-chicken.jpg" },
+    { id: "table-fries", name: { ar: "فروج على الطاولة", en: "Dine-in Chicken" }, desc: { ar: "مع بطاطا", en: "With fries" }, price: 25, currency: "usd", img: "images/table-chicken-fries.jpg" },
+    { id: "table-plain", name: { ar: "فروج على الطاولة", en: "Dine-in Chicken" }, desc: { ar: "بدون بطاطا", en: "Without fries" }, price: 20, currency: "usd", img: "images/table-chicken.jpg" },
+  ]},
+  { id: "meals", title: { ar: "وجبات", en: "Meals" }, items: [
+    { id: "meal-s", name: { ar: "وجبة حجم صغير", en: "Small Meal" }, desc: { ar: "بطاطا + ثوم + كبيس", en: "Fries + garlic + pickles" }, price: 6, currency: "usd", img: "images/meal-small.jpg" },
+    { id: "meal-l", name: { ar: "وجبة حجم كبير", en: "Large Meal" }, desc: { ar: "بطاطا + ثوم + كبيس", en: "Fries + garlic + pickles" }, price: 12, currency: "usd", img: "images/meal-large.jpg" },
   ]},
   { id: "sandwiches", title: { ar: "سندويشات", en: "Sandwiches" }, items: [
     { id: "sand-l", name: { ar: "سندويش كبير", en: "Large Sandwich" }, price: 4, currency: "usd", img: "images/sandwich-large.jpg" },
@@ -324,6 +332,7 @@ function render() {
             ${photo(i)}
             <div>
               <h3>${esc(i.name[lang])}</h3>
+              ${i.desc ? `<p class="desc">${esc(i.desc[lang])}</p>` : ""}
               <div class="price">${bdi(fmtPrice(i))}</div>
             </div>
           </article>`).join("")}
